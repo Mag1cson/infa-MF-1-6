@@ -1,1 +1,250 @@
+Практическая работа №1 (Варианты заданий A)
 
+№1
+
+import math
+
+x = 2
+y = 1
+z = 3
+
+result = x**(y**z * x**2) + 3**x + x**3 - math.exp(x/2)
+print(result)
+
+№2
+
+import math
+
+x = 2
+
+result = math.sqrt((math.cos(x/2)**2 + 3)) - math.exp(math.sin(x)**2 - 1)
+print(result)
+
+№3
+
+import math
+
+x = 1
+result = (1 + math.log(x+1)) / (2 + (x/(3 + x/4))) - 3.75*x
+print(result)
+№4
+
+import math
+
+x = 0.2
+y = 2
+
+result = (2.1 * (x ** (1/3)) + abs(math.cos(x**2)**3)) / 3*x*y 
+
+print(result)
+
+-----------------------------------------------------------------------------------------------------------
+(Варианты заданий B)
+
+import math
+
+s = 4
+t = 1
+a = s - 4*t
+y = s/t
+
+result = (9*math.cos(a)**3 + 4*y) / (2 + 3*y)
+
+print(result)
+-----------------------------------------------------------------------------------------------------------
+
+Практическая работа №2 (Часть 1)
+
+№1
+x = 1  # Замените значение x на то, которое вы хотите проверить
+
+if -5 < x < 10:
+    print("Точка x принадлежит интервалу (-5;10)")
+else:
+    print("Точка x не принадлежит интервалу (-5;10)")
+
+
+№2
+x = -5  # Замените значение x на то, которое вы хотите проверить
+
+if (-10 < x <= -3) or (5 <= x <= 23):
+    print(f"Точка x = {x} принадлежит интервалу (-10;-3]U[5;23]")
+else:
+    print(f"Точка x = {x} не принадлежит интервалу (-10;-3]U[5;23]")
+----------------------------------------------------------------------------------------------------------------
+
+(Часть 2)
+
+import math
+
+def solve_quadratic_equation(t):
+    a = 2*t
+    b = 3*t - 1
+    c = t - 5
+    
+    discriminant = b**2 - 4*a*c
+    
+    if discriminant > 0:
+        x1 = (-b + math.sqrt(discriminant))/(2*a)
+        x2 = (-b - math.sqrt(discriminant))/(2*a)
+        return x1, x2
+    elif discriminant == 0:
+        x = -b / (2*a)
+        return x,
+    else:
+        return "нет корней"
+
+# Интервал перебора чисел
+for t in range(-10, 11):
+    roots = solve_quadratic_equation(t)
+    print(f"При t = {t}, корни уравнения:", roots)
+
+----------------------------------------------------------------------------------------------------------------
+Практическая работа №3
+
+x = float(input("Введите число x: "))
+y = float(input("Введите число y: "))
+z = float(input("Введите число z: "))
+M = float(input("Введите число M: "))
+
+a = []
+
+if x > M:
+    a.append(2 * x)
+if y > M:
+    a.append(2 * y)
+if z > M:
+    a.append(2 * z)
+
+if len(a) > 0:
+    print("Числа, больше заданного числа M и их удвоенные значения:")
+    for number in a:
+        print(number)
+    print(f"Количество чисел, больших M: {len(a)}")
+else:
+    print("Нет чисел, больших заданного числа M.")
+
+----------------------------------------------------------------------------------------------------------------
+Практическая работа №4
+
+import sympy as sp
+
+x = sp.Symbol('x')
+
+f = x**4 - 2*x**3 - 18*x**2 - 16*x + 1
+
+f_prime = f.diff(x)
+
+extremum_points = sp.solve(f_prime, x)
+
+points = extremum_points + [-5, 5]
+values = [f.subs(x, point) for point in points]
+
+max_value = max(values)
+min_value = min(values)
+
+print("Наибольшее значение функции на отрезке [-5;5]:", max_value)
+print("Наименьшее значение функции на отрезке [-5;5]:", min_value)
+
+----------------------------------------------------------------------------------------------------------------
+Практическая работа №5
+
+def uk(x, k):
+    return (-1)**k * ((x**k) / (2*k - 1) * (2*k + 1))
+
+def calculate_sum(x, n):
+    total_sum = 0
+    for k in range(1, n+1):
+        total_sum += uk(x, k)
+    return total_sum
+
+x_values = [0.1, 0.3, 0.4, 0.7, 1.0]
+n = 10
+
+print("|   x   |    S    |")
+print("-------------------")
+for x in x_values:
+    result = calculate_sum(x, n)
+    print(f"| {x}  |  {result:.6f} |")
+print("-------------------")
+
+
+----------------------------------------------------------------------------------------------------------------
+Практическая работа №6
+
+# Функция для заполнения массива
+def fill_array(arr, size):
+    for i in range(size):
+        value = float(input(f"Введите значение элемента {i+1}: "))
+        arr.append(value)
+    return arr
+
+# Функция для нахождения K и S
+def find_k_and_s(arr):
+    k = 0
+    s = 0
+    found_negative = False
+    for num in arr:
+        if num < 0:
+            found_negative = True
+            break
+        k += 1
+        s += num
+    return k, s
+
+# Ввод размера массива
+size = int(input("Введите размер массива (не более 17): "))
+while size > 17 or size < 1:
+    size = int(input("Неверный размер массива. Введите размер массива (не более 17): "))
+
+# Заполнение массива
+arr = []
+arr = fill_array(arr, size)
+
+# Нахождение K и S
+k, s = find_k_and_s(arr)
+
+# Вывод результатов
+print("Исходный массив:", arr)
+print("Количество элементов, предшествующих первой отрицательной компоненте (K):", k)
+print("Сумма этих элементов (S):", s)
+
+----------------------------------------------------------------------------------------------------------------
+Практическая работа №7
+
+import numpy as np 
+A = np.array([[1, 2, 3], [1, 2, 1], [3, 2, 0]])
+B = np.array([[4, 1, 2], [0, 4, 3], [1, 1, 1]])
+r = np.array([[-0.7], [1.3], [0.2]])
+q = np.array([[-1.6], [0.8], [1.1]])
+p = np.array([[0.1], [1.7], [-1.5]])
+
+x = sum((B[i] * (p[i] - q[i]) * r[i] for i in range(3)))
+
+print("Скалярное произведение векторов:", x)
+
+----------------------------------------------------------------------------------------------------------------
+Практическая работа №8
+
+import numpy as np 
+N=3
+
+A = np.array([[1, 5, 1], [4, -1, 1], [21, 6, 56]])
+B = np.array([26, 17, 449])
+
+
+x = np.linalg.inv(A).dot(B)
+print('')
+print('X')
+for i in range (0,N):
+    print('%f'%x[i],end=' ')
+print('')
+
+x1 = np.linalg.solve(A,B)
+print('')
+print('X1')
+
+for i in range (0,N):
+    print('%f'%x1[i],end=' ')
+print('')
+print('\nDet(A)=%f'%np.linalg.det(A))
